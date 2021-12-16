@@ -1,178 +1,174 @@
 ﻿const config = {
-  // 数据源的编码方式。
-  // 默认为UTF-8。
-  // 如果是国内用户，且使用旧版Execl处理数据，保存的编码很可能是GBK的，如果出现乱码则将这里改成GBK。
-  // 不建议修改这里。而是建议将自己制作完毕的csv文件的内容复制到example.csv中。因为example.csv的编码格式是所有语言都支持的。
-  // Encoding is not recommended to be modified.
+  // =================<데이터 소스의 인코딩 방식>=============================
+  // 기본값은 UTF-8.
+  // 만약 중국 사용자라면, 또한 오래된 것을 사용합니다.에디션 Execl 처리 데이터, 저장된 편집사이즈는 GBK일 가능성이 높아 흐트러지면사이즈는 이곳을 GBK로 변경했다.
+  // 여기를 수정하는 것을 권장하지 않습니다.자신이 작성한 csv 파일을 제안하는 안입니다.example. csv로 복사하기중. example. csv의 인코딩 형식은 모든 언어를 지원하기 때문입니다.  // Encoding is not recommended to be modified.
   // Instead, it is recommended to copy the contents of the CSV file produced by yourself to example.csv.
   // The encoding format of example.csv is supported by all languages.
   encoding: "UTF-8",
 
-  // 每个时间节点最多显示的条目数。
+  // 시간 노드당 최대 표시줄목수.
   max_number: 20,
 
-  // 控制是否显示顶部附加信息文字。
+  // 윗부분 추가 정보 표시 여부 제어문자.
   showMessage: true,
 
-  // 时间自动排序。
-  // !!!请确保打开此项时，使用的是标准日期格式！(即：YYYY-MM-DD HH:MM)
-  // 如果关闭，排序顺序为csv表格的时间字段自上而下的出现顺序。
-  // 如果你的日期格式为标准的日期格式，则可以无视数据排序，达到自动按照日期顺序排序的效果。
-  // 开启auto_sort可以实现时间的自动补间。
+  // ==================<시간 자동 정렬>========================================
+  // true => 표준일자 형식 사용 (ex：YYYY-MM-DD HH:MM)
+  // false => csv 정렬 순서 사용
   // Auto Sort by Time
   // Please ensure using standard datetime format (YYYY-MM-DD HH:MM) when this term is enabled!!!
-  auto_sort: false,
+  auto_sort: true,
 
-  // 时间格式化
-  timeFormat: "%Y-%m-%d",
+  // 시간 포맷
+  timeFormat: "%Y-%m",
 
-  // 倒序，使得最短的条位于最上方
+  // 거꾸로 가기, 가장 짧은 줄이 가장 짧은 곳에 위치하도록 하기위쪽
   reverse: false,
 
-  // 类型根据什么字段区分？如果是name，则关闭类型显示
+  // 형식 구분 필드 (name이 기본값)
   divide_by: "type",
-
-  // 颜色根据什么字段区分？
+  // ===============<색상 관련>==================================
+  // 색 구분 필드
   divide_color_by: "name",
 
-  // 字段的值与其对应的颜色值
-  // 也可在src/colors.js 中设置
+  // 필드의 색상과 일치하는 값
+  // src/colors.js에서도 설정 가능
   color: {
     Chinese: "#1177CC",
     Japanese: "#667788"
   },
 
-  // 指定一组颜色值，用于自定义所有bar 的配色方案。如果为空则使用默认配置。
+  // 사용 색깔 지정(비어있으면 기본설정 사용)
   color_palette: [],
 
-  // 颜色渐变：颜色绑定增长率
-  changeable_color: false,
+  // 색상 그라데이션: 색상 바인딩 증가율 
+  // true-> 모두 같은 색이 됨/
+  // false -> divide_color_by와 같은 형태
+  changeable_color: true,
 
-  // 添加功能：不同类型的增长率所用渐变色不同(暗→亮)
-  // 如果该项为false，那么所有条目全部按照color_range变色
-  // 如果该项为true，那么按照src/color_ranges.js中的color_ranges变色，默认色板为color_range
-  // 一个具体的设置模板见src/_color_ranges.js，将其更名为color_ranges.js再设置即可
+  // 추가기능 : 종류별 그라데이션 차이주기(어두운것 -> 밝게)
+  // true-> src/color_ranges.js에 따라 변함.
+  // false -> color_를 따른다.
+  // 구체적인 설정 템플릿이 안보인다면 src/color_ranges.js -> color_ranges.js로 재설정 
   divide_changeable_color_by_type: false,
   color_range: ["#ff7e5f", "#feb47b"],
 
-  // 附加信息内容。
+  // ===============<표시되는 정보관련>==================================
   // left label
-  itemLabel: "左侧文字",
+  itemLabel: "왼쪽 글자 내용",
 
   // right label
-  typeLabel: "右侧文字",
+  typeLabel: "오른쪽 글자 내용",
 
-  // 榜首项目信息的水平位置 。
   // Top item information horizontal location
   item_x: 250,
 
-  // 时间点间隔时间。
+  // 시간 간격입니다.
   interval_time: 1,
 
-  // 上方文字水平高度。
+  // 위쪽 텍스트 수준입니다.
   text_y: -50,
 
-  // 右侧文字横坐标
+  // 오른쪽 가로 좌표
   text_x: 1000,
-  // 偏移量
+
+  // 편향량
   offset: 350,
 
-  // 长度小于display_barInfo的bar将不显示barInfo。
   // Hide barInfo if bar is shorter than barInfo
   display_barInfo: 0,
 
-  // 使用计数器
-  // 注意！使用计时器和使用类型目前不能兼容，即不能同时开启！
-  // 计数器会出现在右上角，记录着当前榜首的持续时间。
+  // ==================<Counter>=======================================
+  // !!!！타이머와 클래스 사용형 호환 불가, 즉 동시에 열 수 없음！!!!!!
+  // counter가 우측 상단에 나타난다.
+  //  1위의 지속 시간을 기록하는지 여부
   use_counter: false,
-  // 每个时间节点对于计数器的步长。
-  // 比如时间节点日期的间隔可能为1周（七天），那么step的值就应该为7。
+  // 매 시간 노드마다 counter에 대한 보폭을 설정
+  // ex. 시간 노드 날짜의 간격입니다1주일(7일)까지 가능하면 step7은 돼야 한다.
   step: 1,
 
-  //////////////////////////////////////////////////////////////////////////////
-  // 格式化数值
-  // 这里控制着数值的显示位数。主要靠修改中间的数字完成，如果为1则为保留一位小数。
-  // 逗号表示每隔三位数用","分割
+  // ====================<포맷수치>======================================
+  // 수치 표시 자릿수
+  // -> 주로 중간의 숫자를 수정하여 완성 (숫자가 1인 경우 한자리 소수)
+  //  쉼표는 세 자릿수 간격을 의미
   // '.2f' means keeping two decimals.
   format: ",.0f",
 
-  // 后缀
+  // 접미사
   postfix: "",
 
-  // 如果看不懂这是在干什么的话，建议不要修改这里。
-  // 反格式化函数:
-  // 格式化操作可能会导致NaN问题。此函数将格式化后的数值反格式化为JS可以识别的数字。
+// 이게 무슨 짓인지 이해가 안 간다면말, 여기를 수정하지 말 것을 건의합니다.
+// 안티 포맷 함수:
+// 포맷 작업으로 인해 NaN가 발생할 수 있습니다. 이 함수는 JS로 인식할 수 있는 숫자를 거꾸로 포맷한 값입니다.
   deformat: function (val, postfix) {
     return Number(val.replace(postfix, "").replace(/\,/g, ""));
   },
-  //////////////////////////////////////////////////////////////////////////////
 
-  // 图表左右上下间距。
-  // 注意，left_margin不包括左侧的label，修改数值较小会导致左侧label不显示
+  // ====================<그래프 설정>======================================
+  // 주의, left_margin 왼쪽에 있는 label을 포함하지 않기에 수정변경값이 작으면 왼쪽 label이 표시되지 않는다
   left_margin: 250,
   right_margin: 150,
   top_margin: 180,
   bottom_margin: 0,
 
-  // 是否开启时间标签。
+  // 시간 탭을 열 지 여부 
   dateLabel_switch: true,
-  // 时间标签坐标。建议x：1000 y：-50开始尝试，默认位置为x:null,y:null
+  // 시간 탭 좌표(기본값은 null, null)(이경우 x:1000 y:-50 시작)
   dateLabel_x: null,
   dateLabel_y: null,
 
-  // 允许大于平均值的条消失时上浮。
+  // 평균치보다 큰 줄이 사라지도록 허용할지 여부
   allow_up: false,
 
-  // 所有条目上浮 - 用于反向排行榜等情况
+  // 모든 항목 업로드 - 반대 사용차트 등 상황으로
   always_up: false,
 
-  // 设置动画效果，如果为true，则新进入的条目从0开始。
+  // 애니메이션 효과 설정 (중간에 새로 들어오는 항목은 0부터 시작함)
   enter_from_0: true,
 
-  // 如果所有数字都很大，导致拉不开差距则开启此项使得坐标原点变换为（最小值）*2-（最大值）
+  // // 만약 모든 숫자가 너무 크면, 발생합니다.격차를 벌릴 수 없으면 이 상자를 열어서 좌표의 원점을 표시합니다.점 변환(최소값)*2-(최대값)값)
   big_value: true,
 
-  // 如果要使用半对数坐标，则开启此项
+  // 반대수 좌표를 사용할지 여부
   use_semilogarithmic_coordinate: false,
 
-  // barinfo太长？也许可以试试这个
+  // barinfo가 너무 길다면 true해보기
   long: false,
 
-  // 延迟多少个时间节点开始
+  // 노드 시작이 지연될 지 여부
   wait: 0,
 
-  // 单独控制交换动画速度倍率
+  // 교환 애니메이션 속도 배율 따로 제어
   update_rate: 1,
 
-  // 开启匀速动画效果
+  // 등속 애니메이션 효과 켜기
   // animation:'linear',
   showLabel: true,
 
-  // label x轴位置
+  // label x 축 위치
   labelx: -10,
 
-  use_img: true,
-
-  // 图片路径，本地图片或者网上图片。
-  // 也可在imgs.js中配置。
+  // 이미지 사용 여부
+  use_img: false,
+  // 이미지 경로, 로컬 이미지 또는 네트워크사진을 올리다.
+  // imgs.js에서도 매치 가능사다.
   imgs: {
-    item:
-      "http://i1.hdslb.com/bfs/face/983034448f81f45f05956d0455a86fe0639d6a36.jpg",
+    항목명: "링크",
     条目:
       "http://i1.hdslb.com/bfs/face/983034448f81f45f05956d0455a86fe0639d6a36.jpg",
     任意名称: "path/to/img"
   },
 
-  // 全局背景颜色
-  background_color: "#FFFFFF",
+  // 화면 배경 색
+  background_color: "#000",
 
-  // 矩形柱是否为圆角矩形
+  // 그래프 막대 테두리 둥글게 할지 여부
   rounded_rectangle: true,
 
-  // 是否显示x轴轴线
+  // x축 선을 보일지 여부
   show_x_tick: true,
 
-  // 限制bar info 展示的长度
   // limit bar info display length
   bar_name_max: 30
 };
