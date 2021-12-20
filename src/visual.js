@@ -4,6 +4,7 @@
  * @create date 2018-05-02 13:17:10
  * @modify date 2019-03-20 15:17:24
  * @desc Visual core code
+ * @
  */
 
 // import * as d3 from 'd3';
@@ -11,11 +12,22 @@
 
 d3.select("#inputfile").on("change", getCsv);
 function getCsv() {
-  d3.select("#inputfile").attr("hidden", true);
+  document.querySelector(".selectExcel").classList.add("hidden");
+  document.querySelector(".graphSVG").classList.remove("hidden");
   var r = new FileReader();
   r.readAsText(this.files[0], config.encoding);
+
+  // 형식에 맞게 csv를 변형해주는 과정
+  
+
+
+
+
+
+
+
   r.onload = function () {
-    //读取完成后，数据保存在对象的result属性中
+    // 읽기가 완료되면 데이터는 개체의 result 속성에 저장됩니다.
     var data = d3.csvParse(this.result);
     try {
       draw(data);
@@ -34,11 +46,8 @@ function draw(data) {
   });
   let rate = [];
   var auto_sort = config.auto_sort;
-  if (auto_sort) {
-    var time = date.sort((x, y) => new Date(x) - new Date(y));
-  } else {
-    var time = date;
-  }
+  if (auto_sort) var time = date.sort((x, y) => new Date(x) - new Date(y));
+  else var time = date;
   var use_semilogarithmic_coordinate = config.use_semilogarithmic_coordinate;
   var big_value = config.big_value;
   var divide_by = config.divide_by;
@@ -55,10 +64,10 @@ function draw(data) {
     });
   var baseTime = 3000;
 
-  // 如果用户提供的color_palette 长度不为0 则使用它，否则使用d3.schemeCatetory10
+  // 사용자가 제공하는 color_palette 길이가 0이 아니면 사용하시고, 그렇지 않으면 d3.schemeCatetory 10을 사용하십시오.
   var user_pallete = config.color_palette;
   var product_palette = user_pallete.length !== 0 ? user_pallete : d3.schemeCategory10;
-  // 选择颜色
+  // 색상 선택
   function getColor(d) {
     var r = 0.0;
     if (changeable_color) {
@@ -89,7 +98,7 @@ function draw(data) {
       ];
     }
   }
-
+  // Constants
   var showMessage = config.showMessage;
   var allow_up = config.allow_up;
   var always_up = config.always_up;
@@ -97,9 +106,10 @@ function draw(data) {
   var text_y = config.text_y;
   var itemLabel = config.itemLabel;
   var typeLabel = config.typeLabel;
-  // 长度小于display_barInfo的bar将不显示barInfo
+
+  // display_barInfo보다 길이가 작은 bar는 barInfo를 표시하지 않습니다
   var display_barInfo = config.display_barInfo;
-  // 显示类型
+  // type 보이기
   if (config.use_type_info) {
     var use_type_info = config.use_type_info;
   } else if (divide_by != "name") {
@@ -107,9 +117,9 @@ function draw(data) {
   } else {
     var use_type_info = false;
   }
-  // 使用计数器
+  // counter 사용여부
   var use_counter = config.use_counter;
-  // 每个数据的间隔日期
+  // 데이터마다 날짜 간격
   var step = config.step;
   var long = config.long;
   var format = config.format;
@@ -144,7 +154,7 @@ function draw(data) {
   var currentdate = time[0].toString();
   var currentData = [];
   var lastname;
-  const svg = d3.select("svg");
+  const svg = d3.select(".graphSVG");
 
   const width = svg.attr("width");
   const height = svg.attr("height");
@@ -314,7 +324,7 @@ function draw(data) {
   }
 
   if (showMessage) {
-    // 左1文字
+    // 왼쪽 글자
     var topInfo = g
       .insert("text")
       .attr("class", "growth")
@@ -322,14 +332,14 @@ function draw(data) {
       .attr("y", text_y)
       .text(itemLabel);
 
-    // 右1文字
+    // 오른쪽 글자
     g.insert("text")
       .attr("class", "growth")
       .attr("x", text_x)
       .attr("y", text_y)
       .text(typeLabel);
 
-    // 榜首日期计数
+    // 1위 지속일 수
     if (use_counter == true) {
       var days = g
         .insert("text")
@@ -337,7 +347,7 @@ function draw(data) {
         .attr("x", text_x + offset)
         .attr("y", text_y);
     } else {
-      // 显示榜首type
+      // 1위 보이기 t
       if (use_type_info == true) {
         var top_type = g
           .insert("text")
@@ -361,8 +371,8 @@ function draw(data) {
     // yScale
     //     .domain(currentData.map(d => d.name).reverse())
     //     .range([innerHeight, 0]);
-    // x轴范围
-    // 如果所有数字很大导致拉不开差距
+    // x축 범위
+    // 만약 모든 숫자가 너무 크면 격차를 벌릴 수 없다.
 
     if (big_value) {
       xScale
@@ -424,7 +434,7 @@ function draw(data) {
     });
 
     if (showMessage) {
-      // 榜首文字
+      // 1위 텍스트
       topLabel.data(currentData).text(function (d) {
         if (lastname == d.name) {
           counter.value = counter.value + step;
@@ -436,7 +446,7 @@ function draw(data) {
         return d.name;
       });
       if (use_counter == true) {
-        // 榜首持续时间更新
+        // 1위 지속 시간 업데이트
         days
           .data(currentData)
           .transition()
@@ -455,7 +465,7 @@ function draw(data) {
             };
           });
       } else if (use_type_info == true) {
-        // 榜首type更新
+        // 1위 type 업데이트
         top_type.data(currentData).text(function (d) {
           return d["type"];
         });
@@ -558,7 +568,7 @@ function draw(data) {
         .attr("r", 40 / 2)
         .attr("fill-opacity", 1);
     }
-    // bar上文字
+    // bar의 문자
     var barInfo = barEnter
       .append("text")
       .attr("x", function (d) {
@@ -645,7 +655,7 @@ function draw(data) {
         .duration(2990 * interval_time)
         .tween("text", function (d) {
           var self = this;
-          // 初始值为d.value的0.9倍
+          // 초기값은 d.value의 0.9배입니다.
           self.textContent = d.value * 0.9;
           var i = d3.interpolate(self.textContent, Number(d.value)),
             prec = (Number(d.value) + "").split("."),
@@ -877,7 +887,7 @@ function draw(data) {
   var p = config.wait;
   var update_rate = config.update_rate;
   var inter = setInterval(function next() {
-    // 空过p回合
+    // p라운드 비우기
     while (p) {
       p -= 1;
       return;

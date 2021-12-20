@@ -1,17 +1,16 @@
 ﻿const config = {
   // =================<데이터 소스의 인코딩 방식>=============================
   // 기본값은 UTF-8.
-  // 만약 중국 사용자라면, 또한 오래된 것을 사용합니다.에디션 Execl 처리 데이터, 저장된 편집사이즈는 GBK일 가능성이 높아 흐트러지면사이즈는 이곳을 GBK로 변경했다.
-  // 여기를 수정하는 것을 권장하지 않습니다.자신이 작성한 csv 파일을 제안하는 안입니다.example. csv로 복사하기중. example. csv의 인코딩 형식은 모든 언어를 지원하기 때문입니다.  // Encoding is not recommended to be modified.
+  // Encoding is not recommended to be modified.
   // Instead, it is recommended to copy the contents of the CSV file produced by yourself to example.csv.
   // The encoding format of example.csv is supported by all languages.
   encoding: "UTF-8",
 
   // 시간 노드당 최대 표시줄목수.
-  max_number: 20,
+  max_number: 150,
 
   // 윗부분 추가 정보 표시 여부 제어문자.
-  showMessage: true,
+  showMessage: false,
 
   // ==================<시간 자동 정렬>========================================
   // true => 표준일자 형식 사용 (ex：YYYY-MM-DD HH:MM)
@@ -23,14 +22,14 @@
   // 시간 포맷
   timeFormat: "%Y-%m",
 
-  // 거꾸로 가기, 가장 짧은 줄이 가장 짧은 곳에 위치하도록 하기위쪽
+  // true -> 큰값부터 표시 / false -> 작은 값부터 표시
   reverse: false,
 
   // 형식 구분 필드 (name이 기본값)
-  divide_by: "type",
+  divide_by: "name",
   // ===============<색상 관련>==================================
   // 색 구분 필드
-  divide_color_by: "name",
+  divide_color_by: "type",
 
   // 필드의 색상과 일치하는 값
   // src/colors.js에서도 설정 가능
@@ -43,9 +42,9 @@
   color_palette: [],
 
   // 색상 그라데이션: 색상 바인딩 증가율 
-  // true-> 모두 같은 색이 됨/
+  // true-> 모두 같은 색이 됨
   // false -> divide_color_by와 같은 형태
-  changeable_color: true,
+  changeable_color: false,
 
   // 추가기능 : 종류별 그라데이션 차이주기(어두운것 -> 밝게)
   // true-> src/color_ranges.js에 따라 변함.
@@ -113,7 +112,7 @@
   bottom_margin: 0,
 
   // 시간 탭을 열 지 여부 
-  dateLabel_switch: true,
+  dateLabel_switch: false,
   // 시간 탭 좌표(기본값은 null, null)(이경우 x:1000 y:-50 시작)
   dateLabel_x: null,
   dateLabel_y: null,

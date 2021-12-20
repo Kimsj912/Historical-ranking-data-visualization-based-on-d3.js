@@ -13,7 +13,9 @@ input {
     top: 50%;
     left: 45%;
 }
-
+.hidden{
+    display: none;
+}
 .domain {
     display: none;
 }
