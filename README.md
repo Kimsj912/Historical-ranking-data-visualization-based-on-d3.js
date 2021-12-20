@@ -1,4 +1,4 @@
-# 
+# 안내
 -  Jannchie/Historical-ranking-data-visualization-based-on-d3.js 를 현재 진행하는 프로젝트에 맞게 번역, 변형, 응용한 프로젝트이다.
 
 
