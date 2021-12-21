@@ -19,7 +19,7 @@
   // Please ensure using standard datetime format (YYYY-MM-DD HH:MM) when this term is enabled!!!
   auto_sort: true,
 
-  // 시간 포맷
+  // 시간 포맷 
   timeFormat: "%Y-%m",
 
   // true -> 큰값부터 표시 / false -> 작은 값부터 표시
@@ -27,7 +27,7 @@
 
   // 형식 구분 필드 (name이 기본값)
   divide_by: "name",
-  // ===============<색상 관련>==================================
+  // ===============<색상 관련>====== d============================
   // 색 구분 필드
   divide_color_by: "type",
 

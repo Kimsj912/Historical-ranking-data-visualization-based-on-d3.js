@@ -10,33 +10,51 @@
 // import * as d3 from 'd3';
 // require("./stylesheet.css");
 
-d3.select("#inputfile").on("change", getCsv);
+// d3.select("#inputfile").on("change", getCsv);
+document.querySelector("#inputfile").addEventListener("change",getCsv);
 function getCsv() {
-  document.querySelector(".selectExcel").classList.add("hidden");
-  document.querySelector(".graphSVG").classList.remove("hidden");
-  var r = new FileReader();
-  r.readAsText(this.files[0], config.encoding);
-
-  // 형식에 맞게 csv를 변형해주는 과정
+  document.querySelector(".table").classList.remove("hidden");
   
+  // 형식에 맞게 csv를 변형해주는 과정
+  let r = new FileReader();
+  r.readAsText(this.files[0], config.encoding);
+  console.log(r.result);
+  r.onload = function (){selectDataFromExcel(r.result)};
+}
+ 
+function selectDataFromExcel(res){
 
+    let workBook = XLSX.read(res,{ type: 'binary' });
+    console.log(workBook);
 
-
-
-
-
-
-  r.onload = function () {
+    workBook.SheetNames.forEach(function(sname){
+      let csvFile = XLSX.utils.sheet_to_csv(workBook.Sheets[sname]);
+      // table
+      let table= document.querySelector("#excelTable");
+      console.log(table);
+      csvFile.split("\n").forEach(rowArr =>{
+        // row
+        let newRow = document.createElement("tr");
+        rowArr.split(",").forEach(col=>{
+          // col
+          let newCell;
+          newCell = document.createElement("td");
+          newCell.textContent=col;
+          newCell.disabled = true;
+          newRow.appendChild(newCell);
+        });
+        table.appendChild(newRow);
+      });
+    });
+    // 그림 긜는 부분으로 넘겨줌.
     // 읽기가 완료되면 데이터는 개체의 result 속성에 저장됩니다.
-    var data = d3.csvParse(this.result);
-    try {
-      draw(data);
-    } catch (error) {
-      alert(error);
-    }
-  };
-};
-
+    // var data = d3.csvParse(this.result);
+    // try {
+    //   draw(data);
+    // } catch (error) {
+    //   alert(error);
+    // }
+}
 function draw(data) {
   var date = [];
   data.forEach(element => {
@@ -155,6 +173,7 @@ function draw(data) {
   var currentData = [];
   var lastname;
   const svg = d3.select(".graphSVG");
+  svg.attr("width",1900).attr("height",1020);
 
   const width = svg.attr("width");
   const height = svg.attr("height");

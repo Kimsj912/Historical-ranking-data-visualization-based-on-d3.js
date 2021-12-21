@@ -1,0 +1,43 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+    }
+}
+#inputfile {
+    position: inherit;
+}
+input {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
+.hidden{
+    display: none;
+}
+.container{
+    display: block;
+    overflow-x: auto;
+    white-space: wrap;
+    width: 100%;
+}
+table{
+    display: block;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    white-space: wrap;
+    height: 80vh;
+    padding: 1em;
+    margin: 5rem 0rem;
+
+}
+table tbody{
+    display: table;
+    width: 100%;
+}

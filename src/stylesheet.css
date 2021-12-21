@@ -1,21 +1,13 @@
 /**
  * @author Jannchie
  * @email jannchie@gmail.com
- * @create date 2018-05-03 08:44:46
+ * @create date 2018-05-03 08:44:46 
  * @modify date 2019-04-15 15:43:32
 */
 body {
     margin: 0px;
 }
 
-input {
-    position: absolute;
-    top: 50%;
-    left: 45%;
-}
-.hidden{
-    display: none;
-}
 .domain {
     display: none;
 }
