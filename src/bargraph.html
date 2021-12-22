@@ -55,10 +55,44 @@
               </div>
             </div>
           </div>
-        </div>
       </main>
-      <div class="container tableContainer">
-        <table class="table table-hover hidden" scrollable ><tbody id="excelTable"></tbody></table>
+      
+      <div class="container">
+        <div class="list-group list-group-horizontal">
+          <a class="list-group-item list-group-item-action flex-row align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">name</h5>
+            </div>
+            <small class="mb-1">막대그래프의 막대 하나 하나가 될 대상들을 의미함</small>
+            <p class="mt-3 align-text-bottom">선택된 값 : <span class="text-decoration-underline">[A3:H6]</span> </p>
+          </a>
+          <a class="list-group-item list-group-item-action flex-row align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">type</h5>
+            </div>
+            <small class="mb-1">동일한 색을 사용할 같은 타입들을 의미함</small>
+            <p class="mt-3 lign-text-bottom">선택된 값 : <span class="text-decoration-underline">[A3:H6]</span> </p>
+          </a>
+          <a class="list-group-item list-group-item-action flex-row align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">value</h5>
+            </div>
+            <small class="mb-1">막대그래프의 각 막대들의 수치를 의미함</small>
+            <p class="mt-3 align-text-bottom">선택된 값 : <span class="text-decoration-underline">[A3:H6]</span> </p>
+          </a>
+          <a class="list-group-item list-group-item-action flex-row align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">date</h5>
+            </div>
+            <small class="mb-1">각 시간에 따른 그래프를 의미함</small>
+            <p class="mt-3 align-text-bottom">선택된 값 : <span class="text-decoration-underline">[A3:H6]</span> </p>
+          </a>
+        </div>
+      </div>
+      <div class="container tableContainer pt-2">
+        <div class="imgContainer">
+          <img src="../img/그림1.png" alt="" width="100%">
+        </div>
       </div>
       <svg class="graphSVG hidden"></svg>
 </body>

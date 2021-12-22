@@ -13,25 +13,29 @@
 // d3.select("#inputfile").on("change", getCsv);
 document.querySelector("#inputfile").addEventListener("change",getCsv);
 function getCsv() {
-  document.querySelector(".table").classList.remove("hidden");
   
-  // 형식에 맞게 csv를 변형해주는 과정
   let r = new FileReader();
   r.readAsText(this.files[0], config.encoding);
-  console.log(r.result);
   r.onload = function (){selectDataFromExcel(r.result)};
 }
- 
+
+// 형식에 맞게 csv를 변형해주는 과정
 function selectDataFromExcel(res){
 
     let workBook = XLSX.read(res,{ type: 'binary' });
     console.log(workBook);
 
     workBook.SheetNames.forEach(function(sname){
+      // csvFile using
       let csvFile = XLSX.utils.sheet_to_csv(workBook.Sheets[sname]);
+      // table view
+      let tableContainer = document.querySelector(".tableContainer");
+      tableContainer.innerHTML = "";
+      let table= document.createElement("table");
+      table.className="table table-hover";
+      let tbody= document.createElement("tbody");
+      tbody.innerHTML="";
       // table
-      let table= document.querySelector("#excelTable");
-      console.log(table);
       csvFile.split("\n").forEach(rowArr =>{
         // row
         let newRow = document.createElement("tr");
@@ -43,8 +47,10 @@ function selectDataFromExcel(res){
           newCell.disabled = true;
           newRow.appendChild(newCell);
         });
-        table.appendChild(newRow);
+        tbody.appendChild(newRow);
       });
+      table.appendChild(tbody);
+      tableContainer.appendChild(table);
     });
     // 그림 긜는 부분으로 넘겨줌.
     // 읽기가 완료되면 데이터는 개체의 result 속성에 저장됩니다.
